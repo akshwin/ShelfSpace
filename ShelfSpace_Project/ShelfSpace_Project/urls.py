@@ -18,7 +18,11 @@ from django.contrib import admin
 from django.urls import path
 
 import books.views as books_views
+from accounts import views as acviews
 
 urlpatterns = [
-    path('', books_views.homepage, name='homepage'),
+    path('', books_views.homepage, name='home'),
+    path('login/', acviews.login, name='login'),
+    path('signup/', acviews.signup, name='signup'),
+    path('logout/', acviews.logout, name='logout'),
 ]
