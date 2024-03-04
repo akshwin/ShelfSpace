@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import file_book, upload_book, download_book, delete_book, view_book, share_book
+from .views import book_list, upload_book, download_book, delete_book, view_book, share_book
 
 app_name= 'books'
 urlpatterns = [
-    path('', file_book, name='file_list'),
+    path('', book_list, name='file_list'),
     path('upload/', upload_book, name='upload_file'),
     path('download/<str:unique_token>/', download_book, name='download_file'),
     path('delete/<str:unique_token>/', delete_book, name='delete_file'),

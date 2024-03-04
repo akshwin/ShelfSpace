@@ -7,22 +7,10 @@ from .forms import FileUploadForm
 from storages.backends.s3boto3 import S3Boto3Storage
 from django.db.models import Sum
 
-def homepage(request):
-    return render(request, 'books/homepage.html')
-
 @login_required
 def book_list(request):
     files = UploadedFile.objects.filter(user=request.user)
-
-    # Calculate total file size for the user
-    total_file_size_bytes = sum(file.file.size for file in files)
-
-    # Convert total file size to KB or MB if needed
-    total_file_size_kb = total_file_size_bytes / 1024
-    total_file_size_mb = total_file_size_kb / 1024
-    total_file_size_mb = round(total_file_size_mb, 2)
-    
-    return render(request, 'books/file_list.html', {'files': files, 'total_file_size_mb': total_file_size_mb})
+    return render(request, 'books/file_list.html', {'files': files})
 
 
 @login_required
