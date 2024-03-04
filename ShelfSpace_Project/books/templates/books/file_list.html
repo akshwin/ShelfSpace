@@ -32,7 +32,7 @@
 
     <h1>Your Files and Documents</h1>
     <div class='container'>
-      <b>You have used: {{total_file_size_mb}}MB of your Space</b>
+      
     </div>
     <br>
     <div class='container'>
@@ -70,10 +70,10 @@
               <li><b>Note: </b>{{ file.notes }}</li>
             </ul>
 
-            <a href="{% url 'files:share_file' unique_token=file.unique_token %}" class="btn btn-primary" id='view' target="_blank">Share File Link</a>
-            <a href="{% url 'files:download_file' unique_token=file.unique_token %}" class="btn btn-success" id='download'>Download File</a>
-            <a href="{% url 'files:view_file' unique_token=file.unique_token %}" class="btn btn-warning" id='view' target="_blank">View File</a>
-            <a class="btn btn-danger" id='delete' href="{% url 'files:delete_file' unique_token=file.unique_token %}">Delete File</a>
+            <a href="{% url 'books:share_file' unique_token=file.unique_token %}" class="btn btn-primary" id='view' target="_blank">Share File Link</a>
+            <a href="{% url 'books:download_file' unique_token=file.unique_token %}" class="btn btn-success" id='download'>Download File</a>
+            <a href="{% url 'books:view_file' unique_token=file.unique_token %}" class="btn btn-warning" id='view' target="_blank">View File</a>
+            <a class="btn btn-danger" id='delete' href="{% url 'books:delete_file' unique_token=file.unique_token %}">Delete File</a>
             
           </div>
         </div>
@@ -85,7 +85,7 @@
   
           if (yes == true) {
               // Replace 'file.id' with the actual value of the file_id variable
-              window.location.replace("{% url 'files:delete_file' unique_token='" + file_id + "' %}");
+              window.location.replace("{% url 'books:delete_file' unique_token='" + file_id + "' %}");
 
               alert("File deleted successfully");
           } else {
