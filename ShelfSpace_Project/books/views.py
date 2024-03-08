@@ -9,7 +9,7 @@ from django.db.models import Sum
 
 @login_required
 def book_list(request):
-    files = UploadedFile.objects.filter(user=request.user)
+    files = UploadedFile.objects.all()
     return render(request, 'books/file_list.html', {'files': files})
 
 
