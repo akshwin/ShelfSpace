@@ -7,7 +7,7 @@
     <br><br>
     <div class="container mx-auto">
 
-      <h1>Upload your file to RMLD File Server</h1>
+      <h1>Upload your file to Shelf Space</h1>
       <br>
 
       <div class="row row-cols-1 row-cols-md-2 mb-3 mx-auto text-center">
@@ -27,6 +27,11 @@
                 <div class="mb-3">
                   <label for="id_notes" class="form-label">Notes (optional):</label>
                   {{ form.notes }}
+                </div>
+
+                <div class="mb-3">
+                  <label for="id_genre" class="form-label">Genre:</label>
+                  {{ form.genre }}
                 </div>
 
                 <button type="submit" class="btn btn-success">Upload</button>

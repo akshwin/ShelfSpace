@@ -33,6 +33,19 @@
     <h1>Books Available to Read!</h1>
     <div class='container'>
       
+      <div class="container">
+        <label for="genre-filter">Filter by Genre:</label>
+        <select id="genre-filter" class="form-select">
+          <option value="">All Genres</option>
+          <option value="action">action</option>
+          <option value="comedy">comedy</option>
+          <option value="drama">drama</option>
+          <option value="sci-fi">sci-fi</option>
+          <option value="horror">horror</option>
+          <option value="self-help">self-help</option>
+        </select>
+      </div>
+
     </div>
     <br>
     <div class='container'>
@@ -44,9 +57,9 @@
 
     <br>
     <br>
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center" id="file-list">
       {% for file in files %}
-      <div class="col">
+      <div class="col" genre="{{ file.genre }}">
         <div class="card mb-4 rounded-3 shadow-sm">
           <div class="card-header py-3">
             <h4 class="my-0 fw-normal"><b>{{ file.file.name|slice:"8:" }}</b></h4>
@@ -68,12 +81,12 @@
               <li><b>Uploaded at: </b>{{ file.uploaded_at }}</li>
               <li><b>Uploaded by: </b>{{ file.user.username }}</li>
               <li><b>Note: </b>{{ file.notes }}</li>
+              <li><b>Genre: </b>{{ file.genre }}</li>
             </ul>
 
             <a href="{% url 'books:share_file' unique_token=file.unique_token %}" class="btn btn-primary" id='view' target="_blank">Share File Link</a>
             <a href="{% url 'books:download_file' unique_token=file.unique_token %}" class="btn btn-success" id='download'>Download File</a>
             <a href="{% url 'books:view_file' unique_token=file.unique_token %}" class="btn btn-warning" id='view' target="_blank">View File</a>
-            <a class="btn btn-danger" id='delete' href="{% url 'books:delete_file' unique_token=file.unique_token %}">Delete File</a>
             
           </div>
         </div>
@@ -124,6 +137,26 @@
   setTimeout(function() {
     document.getElementById('alert-container').style.display = 'none';
   }, 4000);
+</script>
+
+<script>
+  
+  var genreFilter = document.getElementById("genre-filter");
+  var files = document.getElementsByClassName("col");
+  
+  genreFilter.addEventListener("change", function() {
+    var selectedGenre = genreFilter.value.toLowerCase();
+  
+    for (var i = 0; i < files.length; i++) {
+      var fileGenre = files[i].getAttribute("genre"); // Update this line
+      if (selectedGenre === "" || fileGenre === selectedGenre) {
+        files[i].style.display = "block";
+      } else {
+        files[i].style.display = "none";
+      }
+    }
+  });
+  
 </script>
 
 {% endblock %}
