@@ -6,6 +6,6 @@ from .models import UploadedFile
 class FileUploadForm(forms.ModelForm):
     class Meta:
         model = UploadedFile
-        fields = ['file','notes']
+        fields = ['file','notes','genre']
         
         

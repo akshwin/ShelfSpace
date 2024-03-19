@@ -10,6 +10,23 @@ class UploadedFile(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
     notes = models.TextField(blank=True)
     
+    GENRE_CHOICES = [
+        ('action', 'Action'),
+        ('comedy', 'Comedy'),
+        ('drama', 'Drama'),
+        ('sci-fi', 'Science Fiction'),
+        ('horror', 'Horror'),
+        ('self-help', 'Self-Help'),
+    ]
+    
+    genre = models.CharField(
+        max_length=10,
+        choices=GENRE_CHOICES,
+        default='action',
+        blank=True
+    )
+    
+    
     # Add a new field to store the unique token
     unique_token = models.CharField(max_length=32, unique=True, blank=True)
 

@@ -77,6 +77,7 @@ def view_book(request, unique_token):
     else:
         return redirect('books:download_file', file_id=file_instance.id)
     
+    
 def share_book(request, unique_token):
     file_instance = get_object_or_404(UploadedFile, unique_token=unique_token)
     file_path = file_instance.file.name
