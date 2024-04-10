@@ -82,6 +82,7 @@
               <li><b>Uploaded by: </b>{{ file.user.username }}</li>
               <li><b>Note: </b>{{ file.notes }}</li>
               <li><b>Genre: </b>{{ file.genre }}</li>
+              <p>Average Rating: {{ file.rating|default:"Not rated yet" }}</p>
             </ul>
 
             <a href="{% url 'books:share_file' unique_token=file.unique_token %}" class="btn btn-primary" id='view' target="_blank">Share File Link</a>
