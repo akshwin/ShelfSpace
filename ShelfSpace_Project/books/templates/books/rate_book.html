@@ -1,0 +1,17 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <br><br>
+    <div class="container mx-auto">
+      <h1>Rate the Book</h1>
+      <br>
+      <form method="post">
+        {% csrf_token %}
+        {{ rate_form.as_p }}
+        <button type="submit" class="btn btn-success">Rate</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

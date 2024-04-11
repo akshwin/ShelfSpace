@@ -82,11 +82,13 @@
               <li><b>Uploaded by: </b>{{ file.user.username }}</li>
               <li><b>Note: </b>{{ file.notes }}</li>
               <li><b>Genre: </b>{{ file.genre }}</li>
+              <li><b>Average Rating: </b>{{ file.rating|default:"Not rated yet" }}</li>
             </ul>
 
-            <a href="{% url 'books:share_file' unique_token=file.unique_token %}" class="btn btn-primary" id='view' target="_blank">Share File Link</a>
+            <a href="{% url 'books:share_file' unique_token=file.unique_token %}" class="btn btn-primary" id='share' target="_blank">Share File Link</a>
             <a href="{% url 'books:download_file' unique_token=file.unique_token %}" class="btn btn-success" id='download'>Download File</a>
             <a href="{% url 'books:view_file' unique_token=file.unique_token %}" class="btn btn-warning" id='view' target="_blank">View File</a>
+            <a href="{% url 'books:rate_book' unique_token=file.unique_token %}" class="btn btn-secondary" id='rate' target="_blank">Rate File</a>
             
           </div>
         </div>
