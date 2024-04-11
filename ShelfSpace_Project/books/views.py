@@ -2,10 +2,11 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import make_password
-from .models import UploadedFile
-from .forms import FileUploadForm
+from .models import UploadedFile, Rating
+from .forms import FileUploadForm, RatingForm
 from storages.backends.s3boto3 import S3Boto3Storage
 from django.db.models import Sum
+from django.db.models import Count
 
 @login_required
 def book_list(request):
@@ -90,3 +91,33 @@ def share_book(request, unique_token):
         return response
     else:
         return redirect('books:download_file', unique_token=unique_token)
+
+# views.py
+@login_required
+def rate_book(request, unique_token):
+    file_instance = get_object_or_404(UploadedFile, unique_token=unique_token)
+
+    if request.method == 'POST':
+        rate_form = RatingForm(request.POST)
+        if rate_form.is_valid():
+            rating_value = rate_form.cleaned_data['rating']
+            total_ratings = file_instance.ratings.count()  # Total number of ratings
+            current_rating = file_instance.rating
+            new_total_count = total_ratings + 1
+            new_total_rating = current_rating * total_ratings + rating_value
+            new_average_rating = new_total_rating / new_total_count
+
+            file_instance.total_count = new_total_count
+            file_instance.rating = new_average_rating
+            file_instance.save()
+            
+            print(new_average_rating, current_rating, total_ratings, rating_value, new_total_rating)
+
+            # Create the rating instance
+            Rating.objects.create(user=request.user, file=file_instance, rating=rating_value)
+
+            return redirect('books:file_list')  # Redirect to the file list after rating
+    else:
+        rate_form = RatingForm()
+
+    return render(request, 'books/rate_book.html', {'file_instance': file_instance, 'rate_form': rate_form})
