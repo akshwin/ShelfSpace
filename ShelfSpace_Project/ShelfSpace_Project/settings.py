@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'books.apps.BooksConfig',
     'accounts.apps.AccountsConfig',
+    'ShelfSpaceBlogs.apps.ShelfspaceblogsConfig',
 ]
 
 MIDDLEWARE = [
