@@ -24,4 +24,5 @@ urlpatterns = [
     path('signup/', acviews.signup, name='signup'),
     path('logout/', acviews.logout, name='logout'),
     path('books/', include('books.urls')),
+    path('QuotesSharing/', include('ShelfSpaceBlogs.urls')),
 ]
