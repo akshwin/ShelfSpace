@@ -23,4 +23,4 @@ def upvote_post(request, post_id):
         upvote = Upvote.objects.create(user=request.user, post=post)
         post.upvoted_users.add(request.user)
         post.save()
-    return redirect('blog:post_list')
+    return redirect('ShelfSpaceBlogs:post_list')
