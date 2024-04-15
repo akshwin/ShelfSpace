@@ -1,27 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Posts</title>
-</head>
+{% extends 'base.html' %}
+{% block content %}
+{% load static%}
 <body>
-    <h1>Blog Posts</h1>
-    {% for post in posts %}
-        <div>
-            <h2>{{ post.title }}</h2>
-            <p>{{ post.content }}</p>
-            <p>Author: {{ post.author.username }}</p>
-            {% if request.user.is_authenticated %}
-                {% if request.user != post.author %}
-                    <a href="{% url 'blog:upvote_post' post.id %}">Upvote</a>
+    <div class='container'>
+        <h1>Blog Posts</h1>
+        {% for post in posts %}
+            <div>
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.content }}</p>
+                <p>Author: {{ post.author.username }}</p>
+                <p>Upvotes: {{ post.upvote_count }}</p>
+                {% if request.user.is_authenticated %}
+                    {% if request.user != post.author %}
+                        {% if request.user in post.upvoted_users.all %}
+                            <button type="button" disabled>Upvoted</button>
+                        {% else %}
+                            <form action="{% url 'ShelfSpaceBlogs:upvote_post' post.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit">Upvote</button>
+                            </form>
+                        {% endif %}
+                    {% endif %}
                 {% endif %}
-            {% endif %}
-            <hr>
-        </div>
-    {% endfor %}
-    {% if not posts %}
-        <p>No posts available.</p>
-    {% endif %}
+                <hr>
+            </div>
+        {% endfor %}
+        {% if not posts %}
+            <p>No posts available.</p>
+        {% endif %}
+    </div>
 </body>
-</html>
+{% endblock %}
