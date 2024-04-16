@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<body>
+    <div class='container'>
+    <h1>ShelfSpace AI</h1>
+    <p>Powered by Gemini Pro</p>
+
+    <form method="POST" action="{% url 'books:ask_me_anything' %}">
+        {% csrf_token %}
+        <input type="text" name="input_question" placeholder="Ask a question">
+        <button type="submit">Ask</button>
+    </form>
+
+    {% if response %}
+        <div>{{ response }}</div>
+    {% endif %}
+</div>
+</body>
+ {% endblock %}
