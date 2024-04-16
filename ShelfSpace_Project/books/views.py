@@ -8,6 +8,10 @@ from storages.backends.s3boto3 import S3Boto3Storage
 from django.db.models import Sum
 from django.db.models import Count
 
+from django.shortcuts import render
+from django.conf import settings
+import google.generativeai as genai
+
 @login_required
 def book_list(request):
     files = UploadedFile.objects.all()
@@ -121,3 +125,25 @@ def rate_book(request, unique_token):
         rate_form = RatingForm()
 
     return render(request, 'books/rate_book.html', {'file_instance': file_instance, 'rate_form': rate_form})
+
+
+
+
+# Initialize the GenerativeAI API with your API key
+genai.configure(api_key=settings.GEM_MODEL)
+
+# Initialize the Gemini-Pro model
+model = genai.GenerativeModel("gemini-pro")
+
+def ask_me_anything(request):
+    if request.method == 'POST':
+        input_question = request.POST.get('input_question', '')  # Assuming your form has a field named 'input_question'
+
+        # Generate response using the Gemini-Pro model
+        response = model.generate_content(input_question)
+
+        # Render the response in the template
+        return render(request, 'books/gemini.html', {'response': response.text})
+
+    # Render the initial form
+    return render(request, 'books/gemini.html', {})

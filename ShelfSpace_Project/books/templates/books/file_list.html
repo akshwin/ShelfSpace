@@ -89,6 +89,7 @@
             <a href="{% url 'books:download_file' unique_token=file.unique_token %}" class="btn btn-success" id='download'>Download File</a>
             <a href="{% url 'books:view_file' unique_token=file.unique_token %}" class="btn btn-warning" id='view' target="_blank">View File</a>
             <a href="{% url 'books:rate_book' unique_token=file.unique_token %}" class="btn btn-secondary" id='rate' target="_blank">Rate File</a>
+            <a href="{% url 'books:ask_me_anything' %}" class="btn btn-info" id='AI' target="_blank">Ask AI</a>
             
           </div>
         </div>

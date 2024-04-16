@@ -156,5 +156,8 @@ AWS_DEFAULT_ACL =  None
 AWS_S3_VERITY = config('AWS_S3_VERITY', cast=bool)
 DEFAULT_FILE_STORAGE = config('DEFAULT_FILE_STORAGE')
 
+# Gemini Model Integration
+
+GEM_MODEL = config("GOOGLE_API_KEY")
 
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
