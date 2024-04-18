@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container mt-5">
-        <h1 class="text-center">ShelfSpace AI</h1>
+        <h1 class="text-center">ShelfSpace AI for Book Recommendation</h1>
         <p class="text-center">Powered by Gemini Pro</p>
 
         <div class="row justify-content-center mt-4">
             <div class="col-lg-6">
-                <form method="POST" action="{% url 'books:ask_me_anything' %}">
+                <form method="POST" action="{% url 'books:recommend' %}">
                     {% csrf_token %}
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="input_question" placeholder="Ask a question">
-                        <button type="submit" class="btn btn-primary">Ask</button>
+                        <input type="text" class="form-control" name="input_question" placeholder="Ask your requirement along with Genre">
+                        <button type="submit" class="btn btn-primary">Recommend</button>
                     </div>
                 </form>
 

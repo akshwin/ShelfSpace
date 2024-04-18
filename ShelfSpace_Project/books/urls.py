@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import book_list, upload_book, download_book, delete_book, view_book, share_book, rate_book,ask_me_anything
+from .views import book_list, upload_book, download_book, delete_book, view_book, share_book, rate_book,ask_me_anything, recommend
 
 app_name= 'books'
 urlpatterns = [
@@ -10,5 +10,6 @@ urlpatterns = [
     path('view_file/<str:unique_token>/', view_book, name='view_file'),
     path('share_file/<str:unique_token>/', share_book, name='share_file'),
     path('rate_book/<str:unique_token>/', rate_book, name='rate_book'),
-    path('ask/', ask_me_anything, name='ask_me_anything')
+    path('ask/', ask_me_anything, name='ask_me_anything'),
+    path('recommend/', recommend, name='recommend')
 ]

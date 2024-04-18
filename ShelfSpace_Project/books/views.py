@@ -39,14 +39,11 @@ def download_book(request, unique_token):
     response['Content-Disposition'] = f'attachment; filename={file_instance.file.name}'
     return response
 
-# views.py
 
 @login_required
 def delete_book(request, unique_token):
-    # Try to find the file by unique_token
+    
     file_instance = get_object_or_404(UploadedFile, unique_token=unique_token)
-
-    # If file_instance is not found, try to find by hashed_file_id
     if not file_instance:
         hashed_file_id = unique_token
         try:
@@ -96,7 +93,7 @@ def share_book(request, unique_token):
     else:
         return redirect('books:download_file', unique_token=unique_token)
 
-# views.py
+
 @login_required
 def rate_book(request, unique_token):
     file_instance = get_object_or_404(UploadedFile, unique_token=unique_token)
@@ -116,11 +113,9 @@ def rate_book(request, unique_token):
             file_instance.save()
             
             print(new_average_rating, current_rating, total_ratings, rating_value, new_total_rating)
-
-            # Create the rating instance
             Rating.objects.create(user=request.user, file=file_instance, rating=rating_value)
 
-            return redirect('books:file_list')  # Redirect to the file list after rating
+            return redirect('books:file_list') 
     else:
         rate_form = RatingForm()
 
@@ -129,21 +124,21 @@ def rate_book(request, unique_token):
 
 
 
-# Initialize the GenerativeAI API with your API key
 genai.configure(api_key=settings.GEM_MODEL)
-
-# Initialize the Gemini-Pro model
 model = genai.GenerativeModel("gemini-pro")
 
+@login_required
 def ask_me_anything(request):
     if request.method == 'POST':
-        input_question = request.POST.get('input_question', '')  # Assuming your form has a field named 'input_question'
-
-        # Generate response using the Gemini-Pro model
+        input_question = request.POST.get('input_question', '')  
         response = model.generate_content(input_question)
-
-        # Render the response in the template
         return render(request, 'books/gemini.html', {'response': response.text})
-
-    # Render the initial form
     return render(request, 'books/gemini.html', {})
+
+@login_required
+def recommend(request):
+    if request.method == 'POST':
+        input_question = request.POST.get('input_question', '') + "\n\nOnly Type the Book Name and Author. Not Any other thing"
+        response = model.generate_content(input_question)
+        return render(request, 'books/recommender.html', {'response': response.text})
+    return render(request, 'books/recommender.html', {})
