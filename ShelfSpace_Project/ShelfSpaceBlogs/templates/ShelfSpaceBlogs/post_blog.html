@@ -1,33 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static%}
+
 <body>
-    <div class='container'>
-        <h1>Blog Posts</h1>
-        {% for post in posts %}
-            <div>
-                <h2>{{ post.title }}</h2>
-                <p>{{ post.content }}</p>
-                <p>Author: {{ post.author.username }}</p>
-                <p>Upvotes: {{ post.upvote_count }}</p>
-                {% if request.user.is_authenticated %}
-                    {% if request.user != post.author %}
-                        {% if request.user in post.upvoted_users.all %}
-                            <button type="button" disabled>Upvoted</button>
-                        {% else %}
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="text-center mb-4">Blog Posts</h1>
+                {% for post in posts %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ post.title }}</h3>
+                        <p class="card-text">{{ post.content }}</p>
+                        <p class="card-text"><small class="text-muted">Author: {{ post.author.username }}</small></p>
+                        <p class="card-text"><small class="text-muted">Upvotes: {{ post.upvote_count }}</small></p>
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                            {% if request.user.is_authenticated %}
+                            {% if request.user != post.author %}
+                            {% if request.user in post.upvoted_users.all %}
+                            <button type="button" class="btn btn-secondary btn-lg px-4" disabled>Upvoted</button>
+                            {% else %}
                             <form action="{% url 'ShelfSpaceBlogs:upvote_post' post.id %}" method="post">
                                 {% csrf_token %}
-                                <button type="submit">Upvote</button>
+                                <button type="submit" class="btn btn-primary btn-lg px-4">Upvote</button>
                             </form>
-                        {% endif %}
-                    {% endif %}
-                {% endif %}
-                <hr>
+                            {% endif %}
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="alert alert-info" role="alert">
+                    No posts available.
+                </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-        {% if not posts %}
-            <p>No posts available.</p>
-        {% endif %}
+        </div>
     </div>
-</body>
+    
+
 {% endblock %}

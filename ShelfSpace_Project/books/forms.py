@@ -7,7 +7,7 @@ from .models import Rating
 class FileUploadForm(forms.ModelForm):
     class Meta:
         model = UploadedFile
-        fields = ['file','notes','genre','rating']
+        fields = ['file','notes','genre']
         
 class RatingForm(forms.ModelForm):
     class Meta:
