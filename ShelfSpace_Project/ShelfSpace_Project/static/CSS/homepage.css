@@ -1,0 +1,191 @@
+body {
+    background-image: url('https://i.pinimg.com/564x/99/43/7c/99437c219fc5f87c03e3499b8e0fefbf.jpg'); /* Update with your image path */
+    background-size: cover; /* Cover the entire body */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repetition */
+    background-attachment: fixed; /* Fix the background image during scroll */
+
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Keyframes for bounce animation */
+@keyframes popOut {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Keyframes for jump animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply animation to the heading */
+.animated-heading {
+    animation: fadeIn 0.5s ease-in-out; /* Animation duration and easing */
+}
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.navbar a {
+    color: #333;
+    text-decoration: none;
+}
+
+.animated-heading {
+    animation: fadeIn 2s ease-in-out;
+}
+
+.jumbotron {
+    background-color: rgb(255 255 255 / 27%);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: aliceblue;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1, h2 {
+    color: #6ce3e4;
+}
+
+.list-group-item {
+    background-color: rgba(2, 73, 128, 0.9);
+    border: none;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+}
+    
+.list-group-item:hover {
+    transform: scale(1.05);
+}
+
+ /* Typewriter effect */
+ .typewriter-text {
+    overflow: hidden;
+    border-right: .15em solid #333;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+    font-weight: 400; /* Bold the text */
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #333; }
+}
+
+@media (max-width: 768px) {
+    .jumbotron {
+        padding: 20px;
+    }
+    .list-group-item {
+        font-size: 0.9rem;
+    }
+    .navbar-nav {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+}
+    /* Styles for Our Mission block */
+    .mission-block {
+            background-color: rgba(0, 86, 179, 0.1); /* Light blue background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .mission-block h2 {
+            color: rgb(151, 244, 255);
+            
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .mission-block p {
+            color: #333;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: azure;
+        }
+
+        .mission-block p::before {
+            content: "\1F4DA"; /* Book emoji before the paragraph */
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .jumbotron {
+                padding: 20px;
+            }
+            .list-group-item {
+                font-size: 0.9rem;
+            }
+            .navbar-nav {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
+            .mission-block {
+                padding: 15px;
+            }
+
+            .mission-block h2 {
+                font-size: 1.5rem;
+            }
+
+            .mission-block p {
+                font-size: 1rem;
+            }
+        }
