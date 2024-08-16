@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center">ShelfSpace AI</h1>
+        <p class="text-center">Powered by Gemini Pro</p>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-6">
+                <form method="POST" action="{% url 'books:ask_me_anything' %}">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="input_question" placeholder="Ask a question">
+                        <button type="submit" class="btn btn-primary">Ask</button>
+                    </div>
+                </form>
+
+                {% if response %}
+                    <div class="alert alert-info mt-3" role="alert">
+                        {% autoescape off %}
+                            <div id="markdown-container">{{ response }}</div>
+                        {% endautoescape %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- CDN link for markdown-it -->
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var markdownText = document.getElementById('markdown-container').textContent;
+            var md = window.markdownit();
+            var convertedText = md.render(markdownText);
+            document.getElementById('markdown-container').innerHTML = convertedText;
+        });
+    </script>
+{% endblock %}

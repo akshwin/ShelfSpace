@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-(33_x&&ut7ysx!0x&pu&o5)vbki_0e36^ckw@(*v4tb#va@t%8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', ".vercel.app"]
 
 
 # Application definition
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'books.apps.BooksConfig',
     'accounts.apps.AccountsConfig',
+    'ShelfSpaceBlogs.apps.ShelfspaceblogsConfig',
 ]
 
 MIDDLEWARE = [
@@ -77,8 +80,15 @@ WSGI_APPLICATION = 'ShelfSpace_Project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config("DEV_DATABASE_NAME"),
+        'USER': config("DEV_DATABASE_USER"),
+        'PASSWORD': config("DEV_DATABASE_PASSWORD"),
+        'HOST': config("DEV_DATABASE_HOST"),
+        'PORT': config("DEV_DATABASE_PORT"),
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
 }
 
@@ -128,3 +138,26 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+# MEDIA_URL = '/media/'
+MEDIAFILES_LOCATION = 'media'
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % config('AWS_STORAGE_BUCKET_NAME')
+
+
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_SIGNATURE_NAME = config('AWS_S3_SIGNATURE_NAME')
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')
+AWS_S3_FILE_OVERWRITE = config('AWS_S3_FILE_OVERWRITE', cast = bool)
+AWS_DEFAULT_ACL =  None
+AWS_S3_VERITY = config('AWS_S3_VERITY', cast=bool)
+DEFAULT_FILE_STORAGE = config('DEFAULT_FILE_STORAGE')
+
+# Gemini Model Integration
+
+GEM_MODEL = config("GOOGLE_API_KEY")
+
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)

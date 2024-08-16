@@ -4,6 +4,9 @@ from django.contrib import auth
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 
+def homepage(request):
+    return render(request, 'accounts/homepage.html')
+
 # Create your views here.
 def signup(request):
     if request.method == 'POST':
