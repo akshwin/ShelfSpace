@@ -8,7 +8,7 @@
 
   <div class="auth-form mt-3">
     {% if error %}
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger animated-error" role="alert">
       {{ error }}
     </div>
     {% endif %}
@@ -16,28 +16,117 @@
     <br>
     <div class="containers">
       <div class="box" align="center">
-
         <form method="POST" action="{% url 'login' %}">
           <br>
           {% csrf_token %}
           <div class="mb-3" align="center">
             <label for="username" class="form-label">Username</label>
-            <input type="text" name="username" id="username" required>
+            <input type="text" name="username" id="username" class="input-field" required>
           </div>
           <div class="mb-3" align="center">
             <label for="password" class="form-label">Password</label>
-            <input type="password" name="password" id="password" required>
+            <input type="password" name="password" id="password" class="input-field" required>
           </div>
           <div align="center">
-            <button class="btn btn-primary" type="submit">Log in</button>
+            <button class="btn btn-primary animated-button" type="submit">Log in</button>
           </div>
-
         </form>
       </div>
     </div>
   </div>
   <h6 class="text-center mt-3">Don't have an account? <a href="{% url 'signup' %}">Signup!</a></h6>
-
-
 </div>
+
+<style>
+  body {
+    background-image: url('https://i.pinimg.com/564x/cb/17/39/cb1739e900fe43a3d19eef9c2e2d9a26.jpg');
+    background-size: cover; 
+      background-position: center; 
+      background-repeat: no-repeat; 
+      background-attachment: fixed;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .auth-form {
+    background: linear-gradient(135deg, #171722, #4a5668);
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    padding: 40px;
+    animation: fadeIn 1.2s ease-in-out;
+    min-height: 450px;
+  }
+  .text-center{
+    color: #007bff;
+  }
+
+  .form-label {
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  .input-field {
+    width: 30%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .input-field:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+  }
+
+  .animated-error {
+    animation: fadeIn 0.8s ease-in-out;
+  }
+
+  .animated-button {
+    animation: buttonFadeInGrow 1.2s ease-in-out forwards;
+    opacity: 0;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes buttonFadeInGrow {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>
+
 {% endblock %}

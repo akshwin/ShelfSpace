@@ -1,15 +1,4 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="{% static 'CSS/homepage.css' %}">
-    <style>
-      body {
+body {
     background-image: url('https://i.pinimg.com/564x/99/43/7c/99437c219fc5f87c03e3499b8e0fefbf.jpg'); /* Update with your image path */
     background-size: cover; /* Cover the entire body */
     background-position: center; /* Center the image */
@@ -87,7 +76,7 @@
 }
 
 .jumbotron {
-    background-color: rgb(33 42 56 / 84%);
+    background-color: rgb(255 255 255 / 27%);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -149,7 +138,7 @@ h1, h2 {
 }
     /* Styles for Our Mission block */
     .mission-block {
-            background-color:rgb(26 33 40 / 82%); /* Light blue background */
+            background-color: rgba(0, 86, 179, 0.1); /* Light blue background */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -200,39 +189,3 @@ h1, h2 {
                 font-size: 1rem;
             }
         }
-    </style>
-</head>
-<body >
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="jumbotron mt-4">
-                    <h1 class="display-4 text-center animated-heading">Welcome to ShelfSpace</h1>
-                    <p class="lead text-center typewriter-text">Explore a vibrant hub for book lovers to share, donate, and discuss their favorite reads!</p>
-                    <hr class="my-4">
-                    <h3 class="text-center">Features:</h3>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Upload and read books</li>
-                        <li class="list-group-item">Rate the books</li>
-                        <li class="list-group-item">Ask your Doubts to ShelfSpace AI</li>
-                        <li class="list-group-item">Explore books by genre</li>
-                        <li class="list-group-item">Get Book Recommendation from ShelfSpace AI</li>
-                        <li class="list-group-item">Community Section for Sharing Quotes and Highlights</li>
-                    </ul>
-             
-                        <br>
-                        <br>
-                    
-                </div>
-                <div class='container'>
-                    <div class="col-md-6 mission-block">
-                        <h2>Our Mission</h2>
-                        <p>At ShelfSpace, our mission is to make reading a delightful and engaging experience for everyone. We believe in fostering a community where readers can connect, learn, and grow together.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-{% endblock %}
