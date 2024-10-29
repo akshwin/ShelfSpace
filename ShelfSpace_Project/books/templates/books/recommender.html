@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container mt-5">
-        <h1 class="text-center">ShelfSpace AI for Book Recommendation</h1>
-        <p class="text-center">Powered by Gemini Pro</p>
+        <h1 class="text-center title">ShelfSpace AI for Book Recommendation</h1>
+        <p class="text-center subtitle">Powered by Gemini Pro</p>
 
         <div class="row justify-content-center mt-4">
             <div class="col-lg-6">
                 <form method="POST" action="{% url 'books:recommend' %}">
                     {% csrf_token %}
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="input_question" placeholder="Ask your requirement along with Genre">
-                        <button type="submit" class="btn btn-primary">Recommend</button>
+                        <input type="text" class="form-control input-field" name="input_question" placeholder="Ask your requirement along with Genre">
+                        <button type="submit" class="btn btn-primary recommend-btn">Recommend</button>
                     </div>
                 </form>
 
                 {% if response %}
-                    <div class="alert alert-info mt-3" role="alert">
+                    <div class="alert alert-info mt-3 response-box" role="alert">
                         {% autoescape off %}
                             <div id="markdown-container">{{ response }}</div>
                         {% endautoescape %}
@@ -36,4 +36,97 @@
             document.getElementById('markdown-container').innerHTML = convertedText;
         });
     </script>
+
+    <style>
+        /* General Styling */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+        }
+
+        .title {
+            color: #bb86fc;
+            font-size: 2rem;
+            font-weight: bold;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .subtitle {
+            color: #03dac6;
+            font-size: 1.2rem;
+            animation: fadeInSubtitle 1.5s ease-in-out;
+        }
+
+        .input-group {
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 5px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .input-field {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .recommend-btn {
+            background-color: #03dac6;
+            border-color: #03dac6;
+            color: #121212;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .recommend-btn:hover {
+            background-color: #018786;
+            transform: scale(1.05);
+        }
+
+        .response-box {
+            background-color: #2c2c2c;
+            color: #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.6);
+            animation: fadeInResponse 1s ease-in-out;
+        }
+
+        /* Fade-in Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInSubtitle {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInResponse {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 1.8rem;
+            }
+            .subtitle {
+                font-size: 1rem;
+            }
+            .recommend-btn, .input-field {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 {% endblock %}
