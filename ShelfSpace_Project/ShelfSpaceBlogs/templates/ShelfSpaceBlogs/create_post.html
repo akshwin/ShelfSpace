@@ -25,4 +25,84 @@
             </div>
         </div>
     </div>
+
+    <style>
+        /* Basic Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            background-image: url('https://i.pinimg.com/736x/0e/65/ff/0e65ff3139c9b5aec58f66ac2adb1f22.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        }
+        .mb-4{
+            color: white;
+        }
+
+        /* Card Animation */
+        .card {
+            border: none;
+            border-radius: 10px;
+            background: grey;
+            padding: 20px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Fade-in and Slide-up Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form Field Styling */
+        .form-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: black;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        /* Button Styling */
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                
+            }
+            .container {
+                padding: 15px;
+            }
+            .btn-primary {
+                width: 100%;
+                padding: 12px;
+            }
+        }
+    </style>
 {% endblock %}
