@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-{% load static%}
+{% load static %}
 
 <body>
 
@@ -13,8 +13,8 @@
                     <div class="card-body">
                         <h3 class="card-title">{{ post.title }}</h3>
                         <p class="card-text">{{ post.content }}</p>
-                        <p class="card-text"><small class="text-muted">Author: {{ post.author.username }}</small></p>
-                        <p class="card-text"><small class="text-muted">Upvotes: {{ post.upvote_count }}</small></p>
+                        <p class="card-text author-upvote-text"><small>Author: {{ post.author.username }}</small></p>
+                        <p class="card-text author-upvote-text"><small>Upvotes: {{ post.upvote_count }}</small></p>
                         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                             {% if request.user.is_authenticated %}
                             {% if request.user != post.author %}
@@ -39,6 +39,108 @@
             </div>
         </div>
     </div>
-    
 
+    <style>
+        /* Dark Mode Styling */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #bb86fc;
+            font-size: 2rem;
+            font-weight: bold;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .card {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform: translateY(10px);
+            animation: fadeInCard 1s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(0);
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .card-title {
+            color: #bb86fc;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .card-title:hover {
+            color: #bb9afc;
+        }
+
+        .author-upvote-text {
+            color: #cfcfcf;
+            font-size: 0.9rem;
+            background-color: #2c2c2c;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .btn-primary {
+            background-color: #03dac6;
+            border-color: #03dac6;
+            color: #121212;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #018786;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background-color: #606060;
+            border-color: #606060;
+            color: #e0e0e0;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-secondary:disabled {
+            background-color: #505050;
+            color: #a0a0a0;
+        }
+
+        /* Fade-in Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInCard {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .btn-primary {
+                width: 100%;
+                padding: 10px;
+            }
+        }
+    </style>
+
+</body>
 {% endblock %}
